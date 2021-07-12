@@ -142,20 +142,35 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-8">
-                    <form>
+                    <div id="alert-container"></div>
+                    <form name="portfolio-contact-form">
                         <div class="mb-3">
                           <label for="name" class="form-label fw-bold">Fullname</label>
-                          <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="input your name">
+                          <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="bi bi-file-person"></i></span>
+                                </div>
+                                <input type="text" class="form-control" id="name" name="name" aria-describedby="name" placeholder="input your name" required>
+                          </div>
                         </div>
                         <div class="mb-3">
                           <label for="email" class="form-label fw-bold">Email address</label>
-                          <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="input your email">
+                          <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                </div>
+                                <input type="email" class="form-control" id="email" name="email" aria-describedby="email" placeholder="input your email" required>
+                          </div>
                         </div>
                         <div class="mb-3">
                             <label for="message" class="form-label fw-bold">Your message</label>
-                            <textarea class="form-control" id="message" rows="3" placeholder="message here..."></textarea>
+                            <textarea class="form-control" id="message" name="message" rows="3" placeholder="message here..."></textarea>
                         </div>
-                        <button type="button" class="btn btn-outline-primary">Submit</button>
+                        <button type="submit" class="btn btn-outline-primary shadow-sm w-25 btn-kirim">Submit</button>
+                        <button class="btn btn-primary w-25 btn-loading d-none" type="button" disabled>
+                            Loading...
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        </button>
                     </form>
                 </div>
             </div>
@@ -176,5 +191,36 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
     <script src="action.js"></script>
+      
+    <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbytYCYTHKWlsWvOZgZIX7BO1seEccD_phD3Jf-zBtBbiudcs3POC5pvHNq-F3qJvMq5/exec';
+    const form = document.forms['portfolio-contact-form'];
+    const btn_kirim = document.querySelector('.btn-kirim');
+    const btn_loading = document.querySelector('.btn-loading');
+    let my_alert = document.querySelector('#alert-container');
+    
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        // tampilkan button loading, hilangkan button kirim
+        btn_loading.classList.toggle('d-none');
+        btn_kirim.classList.toggle('d-none');
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            // tampilkan button kirim, hilangkan button loading
+            btn_loading.classList.toggle('d-none');
+            btn_kirim.classList.toggle('d-none');
+            // tampilkan alert
+            my_alert.innerHTML = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Terima kasih!</strong> Pesan Anda sudah terkirim.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>`;
+            // reset form
+            form.reset();
+            console.log('Success!', response);
+        })
+        .catch(error => console.error('Error!', error.message))
+    });
+    </script>
+      
   </body>
 </html>
