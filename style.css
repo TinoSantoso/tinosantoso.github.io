@@ -22,3 +22,7 @@ section{
 .inner:hover img{
     transform: scale(1.5);
 }
+
+.card:hover {
+    transform: translateY(-5px) scale(1.000) translateZ(0);
+}
