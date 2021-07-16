@@ -11,6 +11,9 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
     <!-- CSS custom -->
     <link rel="stylesheet" href="style.css">
 
@@ -48,7 +51,7 @@
     <section class="jumbotron text-center">
         <img src="img/sandbox.jpg" alt="test sandbox" width="200" class="rounded-circle img-thumbnail">
         <h1 class="display-4">Tino Santoso</h1>
-        <p class="lead"><i class="bi bi-code-slash">Web developer & Laravel enthusiast.</i></p>
+        <p class="lead"><i class="bi bi-code-slash"></i></p>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,192C384,224,480,256,576,250.7C672,245,768,203,864,165.3C960,128,1056,96,1152,85.3C1248,75,1344,85,1392,90.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
     </section>
     <!-- end jumbotron -->
@@ -57,18 +60,15 @@
     <section id="about">
         <div class="container">
             <div class="row">
-                <div class="col text-center mb-3">
+                <div class="col text-center mb-4">
                     <h3>About</h3>
                 </div>
             </div>
-            <div class="row justify-content-center fs-5 text-center">
-                <div class="col-md-4">
+            <div class="row justify-content-evenly fs-5 text-center">
+                <div class="col-md-4" data-aos="fade-right" data-aos-duration="1000">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero consectetur maiores enim delectus consequatur laborum. Repudiandae exercitationem aliquid consectetur consequuntur reprehenderit, omnis placeat officia nobis.</p>
                 </div>
-                <div class="col-md-4">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut facilis non neque ad autem doloremque nihil illum aspernatur repellat? Placeat culpa voluptates aspernatur minima delectus.</p>
-                </div>
-                <div class="col-md-4">
+                <div class="col-md-4" data-aos="fade-left" data-aos-duration="1000">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero consectetur maiores enim delectus consequatur laborum. Repudiandae exercitationem aliquid consectetur consequuntur reprehenderit, omnis placeat officia nobis.</p>
                 </div>
             </div>
@@ -200,8 +200,22 @@
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        once: true,
+      });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/TextPlugin.min.js"></script>
+    <script>
+        gsap.registerPlugin(TextPlugin);
+        gsap.to('.bi-code-slash',{duration: 1.7, delay: 1, text:'Web developer & Laravel enthusiast.'});
+        gsap.from(".jumbotron img", {duration: 1.1, rotateY: 180, opacity: 0});
+    </script>
+    
     <script src="action.js"></script>
-      
     <script>
     const scriptURL = 'https://script.google.com/macros/s/AKfycbytYCYTHKWlsWvOZgZIX7BO1seEccD_phD3Jf-zBtBbiudcs3POC5pvHNq-F3qJvMq5/exec';
     const form = document.forms['portfolio-contact-form'];
