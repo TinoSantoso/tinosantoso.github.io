@@ -16,7 +16,7 @@ section{
 }
 
 .inner img{
-    transition: all 1.5s ease;
+    transition: all 1.3s ease;
 }
 
 .inner:hover img{
